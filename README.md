@@ -1,7 +1,6 @@
 # sprints-dashboard
 
 # Pages
-
 ## Signup Page
 ### Design
 - Full name
