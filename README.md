@@ -1,70 +1,119 @@
-# Getting Started with Create React App
+# Project Installation
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+- Clone the repository:
+    git clone 
 
-## Available Scripts
+- Install dependencies:
+    npm install
 
-In the project directory, you can run:
+- Take a Tour in the project and read this readme file
 
-### `npm start`
+# Pages
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## 1) Signup Page
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### a) Design:
+- Full name
+- Phone number
+- Address
+- Country
+- Email
+- Password
+- Confirm password (validate it matches the password)
+- Submit/Signup button
+- Login button (already have an account)
 
-### `npm test`
+### b) Tech:
+- All fields are required.
+- Email: Input type email.
+- Password: Input type password.
+- Country: Drop down.
+- All other fields: Text.
+- On submit:
+- Check local storage for users array.
+- Check if the user exists.
+- Validate if the password matches.
+- Validate on empty inputs.
+- Validate short password.
+- Navigate to success page on success.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- On success:
+- Hash password.
+- Create user object.
+- If users array is empty, create an array with the new user, else append the new user to the users database.
+- Set the new signed up user to the local storage "user".
+- Navigate to Login page.
 
-### `npm run build`
+- On failure:
+- Toast with "User already exists" (based on Email).
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## 2) Login Page
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### a) Design:
+- Email
+- Password
+- Submit/login button
+- Signup button (don't have an account)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### b) Tech:
+- Email: Input type email.
+- Password: Input type password.
+- Prevent submit on:
+- Empty inputs.
+- Short password.
+- Wrong email format.
+- Decrypt password and check on registering users.
+- On Success: show success toast and navigate to dashboard.
+- On Failure: show error toast (wrong password, wrong email) with the error.
 
-### `npm run eject`
+## 3) Dashboard Page (Homepage)
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### a) Design:
+[Dashboard Design](https://www.figma.com/file/IxLfNUmTq6hXv5XOk2iojX/rough-design?type=design&node-id=0%3A1&mode=design&t=5Qkmu383ZdJaF6yA-1)
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### b) Tech:
+- Welcome line with the user's full name.
+- Sidebar:
+- Home button: navigate to "/".
+- Profile button: navigate to "/profile/${userId}".
+- Logout button: clear currentUser from local storage and navigate to login page.
+- All users card: get length of all users from local storage.
+- All users table: loop over all users and render a table row for each one with respective data. Include edit and delete buttons.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## 4) Profile Page
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### a) Design:
+[Profile Page Design](https://www.figma.com/file/IxLfNUmTq6hXv5XOk2iojX/rough-design?type=design&node-id=0%3A1&mode=design&t=5Qkmu383ZdJaF6yA-1)
 
-## Learn More
+### b) Tech:
+- Retrieve userId from the URL, get the user object from local storage.
+- Populate the profile page as in the design.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## 5) Edit User Page
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### a) Design:
+- Edit (email, full name, country, address) fields.
+- Populate fields on page load.
+- Replace the new edited user in local storage "currentUser".
+- Toast success "Updated successfully".
+- Button back to the homepage "/".
 
-### Code Splitting
+# Tech Stack
+- React.js
+- Tailwind CSS
+- LocalStorage
+- react-router-dom
+- react-toastify
+- Formik
+- Yup
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+# Guidelines
+- Use functional components.
+- Use PascalCase for components.
+- Place all components in a file with the name of the component.
+- Extract bigger chunks into a reusable component.
 
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+# Git Guidelines
+- Create a new branch for every feature.
+- Commits should be small and concise (created new component, fixed CSS, installed package, etc.) and commit messages should be descriptive of the change.
+- Create a pull request and request a review.
