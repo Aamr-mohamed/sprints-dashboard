@@ -1,15 +1,5 @@
-// - Full name
-//- Phone number
-//- Address
-//- Country
-//- Email
-//- Password
-//- Confirm password (validate it matches the password)
-//- Submit/Signup button
-//- Login button (already have an account)
-
 import React from "react"
-import { Formik, Form } from "formik"
+import { Formik, Form, Field } from "formik"
 import CryptoJS from "crypto-js";
 import * as yup from "yup"
 import { Input } from "@material-tailwind/react";
@@ -19,8 +9,8 @@ import Phone from "@heroicons/react/24/solid/PhoneIcon"
 import Lock from "@heroicons/react/24/solid/LockClosedIcon"
 import Envelope from "@heroicons/react/24/solid/EnvelopeIcon"
 import Home from "@heroicons/react/24/solid/HomeIcon"
-import Planet from '@heroicons/react/24/solid/GlobeAltIcon'
 import { useNavigate } from "react-router-dom";
+import CountriesSelect from "../../Components/Inputs/Input.jsx";
 
 
 function Signup() {
@@ -59,7 +49,7 @@ function Signup() {
 	}
 
 	const submitForm = (values) => {
-		const{repassword,...userData}=values
+		const { repassword, ...userData } = values
 		try {
 			const users = JSON.parse(localStorage.getItem("users") || "[]")
 			const userFound = users.find((user) => user.email === userData.email)
@@ -71,7 +61,7 @@ function Signup() {
 			userData.password = CryptoJS.SHA256(userData.password).toString(CryptoJS.enc.Hex);
 			users.push(userData)
 			localStorage.setItem("users", JSON.stringify(users))
-			console.log(userData)
+
 			customToast("success", "User Registered Successfully")
 			navigate('/login')
 
@@ -82,25 +72,29 @@ function Signup() {
 	}
 
 	return (
-		<div className="w-[100%] min-h-[100vh] flex justify-center items-center bg-[#f6f9ff]">
-			<div className="w-[28%] h-[90%] rounded-lg shadow-lg shadow-[blur:10px] flex items-center flex-col bg-transparent border border-solid border-[rgba(255,255,255,0.5)] py-4 bg-[#ffffff]">
-				<h1 className=" text-3xl mb-2 mt-2">Dashboard</h1>
-				<h2 className="text-black text-3xl my-2">Registeration</h2>
-				<Formik initialValues={initialValuesSignUp} validationSchema={registerSchema} validateOnChange={false}
-					validateOnBlur={false} onSubmit={(values) => {
+		<div className="w-full min-h-screen flex justify-center items-center bg-[#f6f9ff]">
+			<div className="w-full max-w-md px-9 py-4 bg-white shadow-lg rounded-lg">
+				<h1 className="text-3xl text-center font-semibold mb-6">Registration</h1>
+				<Formik
+					initialValues={initialValuesSignUp}
+					validationSchema={registerSchema}
+					validateOnChange={false}
+					validateOnBlur={false}
+					onSubmit={(values) => {
 						submitForm(values)
 					}}>
 					{({ values, errors, touched, handleBlur, handleChange }) => (
-						<Form className="flex flex-col gap-2">
+						<Form className="space-y-4">
 							<div className="flex flex-col relative">
 								<Input icon={<User className="w-4 h-4 text-black" />} error={Boolean(errors.fullname && touched.fullname)} type="name" name="fullname" onChange={handleChange} onBlur={handleBlur} value={values.firstname} color="black" size="lg" variant="standard" autoComplete="off" label="Full Name" />
 								{errors.fullname && touched.fullname && (<p id="feedback" className="text-red-500 text-xs">{errors.fullname}</p>)}
 							</div>
 
-							<div className="flex flex-col relative">
-								<Input icon={<Planet className="w-4 h-4 text-black" />} error={Boolean(errors.country && touched.country)} type="name" name="country" onChange={handleChange} onBlur={handleBlur} value={values.country} color="black" size="lg" variant="standard" autoComplete="off" label="Country" />
-								{errors.country && touched.country && (<p id="feedback" className="text-red-500 text-xs">{errors.country}</p>)}
-							</div>
+							<Field
+								component={CountriesSelect}
+								name="country"
+							/>
+							{errors.country && touched.country && (<p id="feedback" className="text-red-500 text-xs">{errors.country}</p>)}
 
 							<div className="flex flex-col relative">
 								<Input icon={<Home className="w-4 h-4 text-black" />} error={Boolean(errors.address && touched.address)} type="name" name="address" onChange={handleChange} onBlur={handleBlur} value={values.address} color="black" size="lg" variant="standard" autoComplete="off" label="Address" />
@@ -126,19 +120,18 @@ function Signup() {
 								<Input icon={<Lock className="w-4 h-4 text-black" />} error={Boolean(errors.repassword && touched.repassword)} type="password" name="repassword" onChange={handleChange} onBlur={handleBlur} value={values.repassword} color="black" size="lg" variant="standard" autoComplete="off" label="Re-enter Your Password" />
 								{errors.repassword && touched.repassword && (<p id="feedback" className="text-red-500 text-xs">{errors.repassword}</p>)}
 							</div>
-
-
-							<div className="flex justify-center my-3">
-								<button type="submit" className="bg-[#4154f1] px-16 py-2 rounded-lg text-lg text-white hover:bg-[#0b5ed7]">Register</button>
+							<div className="flex justify-center mt-7">
+								<button type="submit" className="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg">Register</button>
 							</div>
-							<div>
-								<p className="text-black text-xs">Already have an Account <a href="login" className="text-blue-500 underline font-bold">Login</a></p>
+							<div className="text-center">
+								<p className="text-sm text-gray-600">Already have an Account? <a href="/login" className="text-blue-500 font-semibold">Login</a></p>
 							</div>
 						</Form>
 					)}
 				</Formik>
 			</div>
-		</div>)
+		</div>
+	)
 }
 export default Signup
 
