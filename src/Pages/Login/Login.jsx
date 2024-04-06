@@ -10,6 +10,7 @@ import CryptoJS from "crypto-js";
 
 function Login() {
 	const navigate = useNavigate()
+
 	const loginSchema = yup.object().shape({
 		email: yup.string()
 			.required("Email is required")
@@ -49,6 +50,7 @@ function Login() {
 			customToast("error", error.messsage)
 		}
 	}
+
 	return (
 
 		<div className="w-full min-h-screen flex justify-center items-center bg-[#f6f9ff]">
@@ -79,7 +81,7 @@ function Login() {
 							</div>
 
 							<div className="text-center">
-								<p className="text-sm text-gray-600">Dont have an Account? <a href="/login" className="text-blue-500 font-semibold">Register</a></p>
+								<p className="text-sm text-gray-600">Dont have an Account? <a href="/signup" className="text-blue-500 font-semibold">Register</a></p>
 							</div>
 						</Form>
 					)}
