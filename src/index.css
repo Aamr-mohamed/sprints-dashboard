@@ -1,7 +1,12 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
+.sidebar-icon{
+  @apply h-6 w-6 inline-block mr-2;
+}
+.sidebar-item{
+  @apply text-white text-xl flex items-center mb-2 px-3 py-2 hover:bg-black hover:rounded-lg;
+}
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
