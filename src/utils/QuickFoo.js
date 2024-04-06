@@ -21,3 +21,16 @@ export function deleteUserById(id) {
 	localStorage.setItem("users", JSON.stringify(updateUsers))
 	return updateUsers
 }
+
+export function isAuth() {
+	const userJson = localStorage.getItem("user");
+	if (!userJson) return false;
+	try {
+		const user = JSON.parse(userJson);
+
+		return true;
+	} catch (error) {
+		console.error("Error parsing user from localStorage:", error);
+		return false;
+	}
+}
