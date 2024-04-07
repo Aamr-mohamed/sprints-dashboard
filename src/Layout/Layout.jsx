@@ -3,17 +3,13 @@ import SideBar from "../Components/SideBar/SideBar";
 
 function Layout({ children }) {
 	return (
-		<div className="flex">
-			<div className="w-1/5 min-h-[100vh]">
-				<SideBar />
-			</div>
+    <div className="flex">
+      <SideBar />
+      <div className="w-full md:w-1/4"></div>
 
-			<div className="w-4/5">
-				{children}
-			</div>
-
-		</div>
-	)
+      <div className="w-full md:w-3/4 m-auto">{children}</div>
+    </div>
+  );
 }
 
 export default Layout

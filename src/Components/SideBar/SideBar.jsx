@@ -30,7 +30,7 @@ function SideBar() {
           showSidebar ? "translate-x-0" : "-translate-x-full"
         } md:translate-x-0 md:static md:min-h-screen md:w-1/4 md:p-10`}
       >
-        <h1 className="text-white text-3xl mt-8">Admin Dashboard</h1>
+        <h1 className="text-white text-3xl mt-8 text-center">Admin Dashboard</h1>
         <div className="relative mt-5">
           <input
             type="text"
