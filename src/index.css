@@ -1,6 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
 .sidebar-icon{
   @apply h-6 w-6 inline-block mr-2;
 }
@@ -9,6 +10,21 @@
 }
 .usertable-cards{
   @apply flex items-center bg-white rounded-md shadow-md px-4 py-6;
+}
+
+
+.gray-row{
+  @apply bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6
+}
+.white-row{
+  @apply bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6
+}
+.table-font-style-right{
+  @apply mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2
+
+}
+.table-font-style-left {
+  @apply text-sm font-medium text-gray-500 inline-flex
 }
 body {
   margin: 0;
@@ -24,3 +40,4 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
