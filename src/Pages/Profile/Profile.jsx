@@ -9,19 +9,38 @@ import Envelope from "@heroicons/react/24/solid/EnvelopeIcon"
 import Home from "@heroicons/react/24/solid/HomeIcon"
 import UserCircle from "@heroicons/react/24/solid/UserCircleIcon"
 import Identification from "@heroicons/react/24/solid/IdentificationIcon"
+import ClipLoader from "react-spinners/ClipLoader";
 
 
 
 function Profile() {
+	const [loading, setLoading] = useState(true)
 	const [user, setUser] = useState(null)
 	const { userId } = useParams()
 	const baseURL = `https://dummyjson.com/users/${userId}`
 	useEffect(() => {
 		axios.get(baseURL).then((response) => {
 			setUser(response.data);
+			setLoading(false);
+		}).catch((error) => {
+			setLoading(false)
+			console.log(error)
 		});
 	}, [userId]);
 	document.title = "User Profile"
+	if (loading) {
+		return (
+			<Layout>
+				<ClipLoader
+					color={"gray"}
+					loading={loading}
+					size={150}
+					aria-label="Loading Spinner"
+					data-testid="loader"
+				/>
+			</Layout>
+		);
+	}
 	if (user) {
 		return (
 			<Layout>
@@ -30,6 +49,9 @@ function Profile() {
 						<h3 class="text-lg leading-6 font-medium text-gray-900 inline-flex">
 							< Identification className="w-5 h-5 text-black mr-2 my-1" /> User Info
 						</h3>
+					</div>
+					<div className="flex justify-center items-center">
+						<img src={user.image} alt="User Profile Image" className="rounded-full shadow-md size-40 mb-2" />
 					</div>
 					<div class="border-t border-gray-200">
 						<dl>
