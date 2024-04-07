@@ -46,6 +46,10 @@ function UsersTable() {
     }
   };
 
+  const handleProfileClick = (userId) => {
+    navigate(`/profile/${userId}`);
+  };
+
   return (
     <div className="mx-8">
       <div className="grid gap-4 lg:grid-cols-3">
@@ -85,13 +89,20 @@ function UsersTable() {
                       className="w-10 h-10 rounded-full"
                       src={user.image}
                       alt="user"
+                      onClick={() => handleProfileClick(user.id)}
                     />
-                    <p className="text-sm text-gray-900 font-medium ml-4">
+                    <p
+                      className="text-sm text-gray-900 font-medium ml-4"
+                      onClick={() => handleProfileClick(user.id)}
+                    >
                       {user.firstName} {user.lastName}
                     </p>
                   </td>
                   <td className="px-6 py-4">
-                    <p className="text-sm text-gray-900 font-medium">
+                    <p
+                      className="text-sm text-gray-900 font-medium"
+                      onClick={() => handleProfileClick(user.id)}
+                    >
                       {user.email}
                     </p>
                   </td>
