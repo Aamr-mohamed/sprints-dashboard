@@ -22,7 +22,7 @@ function Profile() {
 	else {
 		return (
 			<Layout>
-				<h1>User Not Found</h1>
+				<h1>404 User Not Found</h1>
 			</Layout>
 		)
 	}
