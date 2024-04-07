@@ -36,7 +36,7 @@ function Login() {
 					let user = { fullname: userFound.fullname, email: userFound.email, phoneNumber: userFound.phoneNumber, address: userFound.address, country: userFound.country }
 					localStorage.setItem('user', JSON.stringify(user)) // sets another item in localstorage as user to use it later in the project as current user
 					customToast("success", "User Logged In Successfully")
-					navigate('/dashboard')
+					navigate('/')
 
 				} else {
 					customToast("error", "Wrong Password Please Re-enter Your Password")
