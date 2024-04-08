@@ -1,5 +1,5 @@
 import { Routes, Route, Navigate } from "react-router-dom";
-import { Home, Login, Signup, Profile } from "./Pages";
+import { Home, Login, Signup, Profile, EditProfile } from "./Pages";
 import { isAuth } from "./utils/QuickFoo";
 import Dashboard from "./Components/Dashboard/Dashboard.jsx";
 import EditUser from "./Components/EditUser/EditUser.jsx";
@@ -13,7 +13,7 @@ function App() {
 			<Route path="/login" element={<Login />} />
 			<Route path="/signup" element={<Signup />} />
 			{/* <Route path="/dashboard" element={<Dashboard />} /> */}
-			<Route path="/edit/:userId" element={<EditUser />} />
+			<Route path="/edit/:userId" element={<EditProfile />} />
 		</Routes>
 
 	);

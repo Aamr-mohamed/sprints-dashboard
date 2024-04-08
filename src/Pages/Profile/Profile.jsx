@@ -25,7 +25,7 @@ function Profile() {
 	if (user) {
 		return (
 			<Layout>
-				<div class="bg-white max-w-2xl shadow overflow-hidden sm:rounded-lg">
+				<div class="mt-14 w-full md:w-3/4">
 					<div class="px-4 py-5 sm:px-6">
 						<h3 class="text-lg leading-6 font-medium text-gray-900 inline-flex">
 							< Identification className="w-5 h-5 text-black mr-2 my-1" /> User Info
