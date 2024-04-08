@@ -1,41 +1,57 @@
 import React from "react";
+import Select from "react-select";
 import { useCountries } from "use-react-countries";
-import { Select, Option } from "@material-tailwind/react";
+
+const customStyles = {
+  control: (provided) => ({
+    ...provided,
+    backgroundColor: "white",
+    borderColor: "#D1D5DB",
+    minHeight: "48px",
+    boxShadow: "none",
+    "&:hover": {
+      borderColor: "#9CA3AF",
+    },
+  }),
+  
+};
 
 export default function CountriesSelect({ field, form, ...props }) {
-	const { countries } = useCountries();
+  const { countries } = useCountries();
 
-	return (
-		<div>
-			<Select
-				{...field}
-				{...props}
-				size="lg"
-				variant="standard"
-				onChange={(value) => form.setFieldValue(field.name, value)}
-				value={field.value}
-				label="Select Country"
-				selected={(element) =>
-					element &&
-					React.cloneElement(element, {
-						disabled: true,
-						className:
-							"flex items-center opacity-100 px-0 gap-2 pointer-events-none",
-					})
-				}
-			>
-				{countries.map(({ name, flags }) => (
-					<Option key={name} value={name} className="flex items-center gap-2">
-						<img
-							src={flags.svg}
-							alt={name}
-							className="h-5 w-5 rounded-full object-cover"
-						/>
-						{name}
-					</Option>
-				))}
-			</Select>
-		</div>
-	);
+  const options = countries.map(({ name, flags }) => ({
+    value: name,
+    label: name,
+    icon: flags.svg,
+  }));
+
+  const CustomOption = ({ innerProps, data }) => (
+    <div
+      {...innerProps}
+      className="flex items-center gap-[10px] hover:bg-[#EBF4FF] pl-4 pb-1"
+    >
+      <img
+        src={data.icon}
+        alt=""
+        className="h-5 w-5 rounded-full object-cover"
+      />
+      {data.label}
+    </div>
+  );
+
+  const handleChange = (selectedOption) => {
+    form.setFieldValue(field.name, selectedOption.value);
+  };
+
+  return (
+    <Select
+      {...field}
+      {...props}
+      options={options}
+      styles={customStyles}
+      components={{ Option: CustomOption }}
+      onChange={handleChange}
+      value={options.find((option) => option.value === field.value)}
+    />
+  );
 }
-

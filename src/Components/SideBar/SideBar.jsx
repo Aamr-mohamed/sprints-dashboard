@@ -12,6 +12,7 @@ import {
 function SideBar() {
   const [showSidebar, setShowSidebar] = useState(true);
   const navigate = useNavigate();
+  const user = JSON.parse(localStorage.getItem("user"));
 
   return (
     <>
@@ -30,7 +31,9 @@ function SideBar() {
           showSidebar ? "translate-x-0" : "-translate-x-full"
         } md:translate-x-0 md:static md:min-h-screen md:w-1/4 md:p-10`}
       >
-        <h1 className="text-white text-3xl mt-8 text-center">Admin Dashboard</h1>
+        <h1 className="text-white text-3xl mt-8 text-center">
+          Admin Dashboard
+        </h1>
         <div className="relative mt-5">
           <input
             type="text"
@@ -42,24 +45,26 @@ function SideBar() {
           </button>
         </div>
         <ul className="mt-10">
-          <li className="sidebar-item">
+          <li className="sidebar-item" onClick={() => navigate("/")}>
             <HomeIcon className="sidebar-icon" />
-            <div onClick={() => navigate("/")}>Home</div>
+            <div>Home</div>
           </li>
-          <li className="sidebar-item">
+          <li
+            className="sidebar-item"
+            onClick={() => navigate(`/profile/${user.id}`)}
+          >
             <UserIcon className="sidebar-icon" />
-            <div onClick={() => navigate("/profile")}>Profile</div>
+            <div>Profile</div>
           </li>
-          <li className="sidebar-item">
+          <li
+            className="sidebar-item"
+            onClick={() => {
+              localStorage.removeItem("user");
+              navigate("/login");
+            }}
+          >
             <XCircleIcon className="sidebar-icon" />
-            <div
-              onClick={() => {
-                localStorage.clear();
-                navigate("/login");
-              }}
-            >
-              Logout
-            </div>
+            <div>Logout</div>
           </li>
         </ul>
       </div>
